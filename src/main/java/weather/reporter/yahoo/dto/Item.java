@@ -1,4 +1,4 @@
-package weather.reporter.dto;
+package weather.reporter.yahoo.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
