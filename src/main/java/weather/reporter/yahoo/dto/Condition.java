@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Condition{
 
   @JsonProperty("code")
-  private String code;
+  private Integer code;
   @JsonProperty("date")
   private String date;
   @JsonProperty("temp")
@@ -20,12 +20,12 @@ public class Condition{
   private String text;
 
   @JsonProperty("code")
-  public String getCode(){
+  public Integer getCode(){
     return code;
   }
 
   @JsonProperty("code")
-  public void setCode(String code){
+  public void setCode(Integer code){
     this.code = code;
   }
 

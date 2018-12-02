@@ -1,5 +1,8 @@
 package weather.reporter.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static weather.reporter.service.WeatherConditionCategory.RAIN;
 import static weather.reporter.service.WeatherConditionCategory.UNKNOWN;
 
@@ -53,16 +56,30 @@ public enum WeatherCondition{
   SNOW_SHOWERS(46, WeatherConditionCategory.SNOW),//
   ISOLATED_THUNDERSHOWERS(47, RAIN);
 
-  private final int code;
-  private final WeatherConditionCategory category;
+  private static final String RESOURCES = "/Users/aziae0129/WeatherReporter/src/main/resources";
 
-  private WeatherCondition(int code, WeatherConditionCategory category){
+  private static final Map<Integer, WeatherConditionCategory> cachedCodeToCategory = new HashMap<>();
+
+  static {
+    for(WeatherCondition condition : values()) {
+      cachedCodeToCategory.put(condition.code, condition.category);
+    }
+  }
+
+  public final int code;
+  public final WeatherConditionCategory category;
+
+  WeatherCondition(int code, WeatherConditionCategory category){
     this.code = code;
     this.category = category;
   }
 
-  private WeatherCondition(int code){
+  WeatherCondition(int code){
     this.code = code;
     this.category = UNKNOWN;
+  }
+
+  public static String getImagePathForCode(int code) {
+    return cachedCodeToCategory.get(code).link;
   }
 }
