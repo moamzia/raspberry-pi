@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import weather.reporter.service.ReporterService;
 import weather.reporter.service.WeatherConditionCategory;
 
+import static weather.reporter.service.ReporterService.MAIN_WEATHER_QUERY;
+
 @RestController
 //@Slf4j
 public class ReporterController{
@@ -24,7 +26,7 @@ public class ReporterController{
 
   @GetMapping("/")
   public String getIndex(){
-    return reporter.getWeatherUpdates("select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"ny, ny\")", "", "");
+    return reporter.getWeatherUpdates(MAIN_WEATHER_QUERY, "", "");
   }
 
   @GetMapping("/help")
@@ -33,7 +35,7 @@ public class ReporterController{
   }
 
   @GetMapping("/{condition}")
-  public String getLinkToWeatherConditionGif(@PathVariable("condition") String category) {
+  public String getLinkToWeatherConditionGif(@PathVariable("condition") String category){
     return WeatherConditionCategory.getLink(category);
   }
 }
